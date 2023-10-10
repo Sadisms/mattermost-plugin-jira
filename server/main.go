@@ -4,9 +4,13 @@
 package main
 
 import (
+	"crypto/tls"
 	"github.com/mattermost/mattermost-server/v6/plugin"
+	"net/http"
 )
 
 func main() {
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+
 	plugin.ClientMain(&Plugin{})
 }
